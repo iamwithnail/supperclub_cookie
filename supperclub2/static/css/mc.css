@@ -1,0 +1,22 @@
+html {
+    width: 100%;
+    background-image: url(/static/img/hero.jpg);
+    background-size: cover;
+    background-color: transparent;
+    margin: 0;
+}
+
+.wrapper {
+    background-color: transparent;
+}
+
+h1 {
+    color: #fff;
+    text-align: center;
+    margin: 6em 0;
+}
+
+.button {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+}

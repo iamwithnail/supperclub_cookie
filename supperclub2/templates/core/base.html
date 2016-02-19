@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Supperclub </title>
+  {% load staticfiles %}
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/localstrapping.css' %}">
+  <script src="{% static 'js/jquery.min.js'  %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <link rel="icon" href="{% static 'img/favicon.ico'  %}">
+    {% block additional_js %}
+    {% endblock %}
+</head>
+<body>
+
+
+
+<body>
+{% block navbar %}
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Supperclub</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">Home</a></li>
+        <li class="active"><a href="event.html">Event</a></li>
+        <li><a href="{% url 'core.views.new_event' %}">New</a></li>
+        <li><a href="{% url 'all_events' %}">All</a></li>
+        <li><a href="/account">My Account</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endblock %}
+{% block content %}
+{% endblock %}
+</body>
+</html>

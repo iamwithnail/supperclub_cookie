@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+<html>
+{% block content %}
+
+<h1> New SupperClub Event</h1>
+    <form action="{% url 'core.views.new_event' %}" method="post">
+        {% csrf_token %}
+
+        {{ form.as_p}}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+
+
+
+
+{% endblock %}
+
+
+</html>
+

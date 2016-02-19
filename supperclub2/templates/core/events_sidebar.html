@@ -1,0 +1,12 @@
+
+<div class="col-sm-2 sidenav">
+    <h1> Upcoming</h1>
+     {% for event in future_events %}
+     <a href="{% url 'core.views.event' event.event_url %}">
+         <div class="well">
+        <p>{{ event.title }}  -  {{event.date}}</p>
+      </div></a>
+{% endfor %}
+
+
+    </div>
