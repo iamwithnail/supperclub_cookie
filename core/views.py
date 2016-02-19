@@ -4,15 +4,17 @@ from .models import Event
 # Create your views here.
 
 def main(request):
-    return render(request, 'index.html')
+    return render(request, 'core/index.html')
 
-def login(request):
-    return render(request, 'login.html')
+def random(request):
+    return render(request, 'core/core/basetest.html')
 
 from django.views.generic import ListView
 
-class ViewAll(ListView):
-    model = Event
+def all_events(request):
+    from .models import Event
+    events = Event.objects.all()
+    return render(request, 'core/event_list.html', {"events": events})
 
 
 def event(request, event_slug):
@@ -37,9 +39,9 @@ def event(request, event_slug):
     #date, then split out into current (single object) and future (list of events)
 
     print event
-    return render(request, 'event.html', {"event": event, "comments": final_comments, "future_events": future_events})
+    return render(request, 'core/event.html', {"event": event, "comments": final_comments, "future_events": future_events})
 
-def new_event(request):
+def add_event(request):
     from forms import EventForm
     if request.method == "POST":
         form = EventForm(request.POST)
@@ -49,7 +51,7 @@ def new_event(request):
             return redirect('events', event.event_url)
     else:
         form = EventForm()
-    return render(request, 'core/edit_event.html', {"form": form})
+    return render(request, 'core/add_event.html', {"form": form})
 
 def new_comment(request):
     from forms import CommentForm
@@ -72,4 +74,4 @@ def new_comment(request):
         print "DEBUG else"
         form = CommentForm()
 
-    return render(request, 'event.html', {"form": form})
+    return render(request, 'core/event.html', {"form": form})

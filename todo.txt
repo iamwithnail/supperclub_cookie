@@ -1,0 +1,10 @@
+1) Sort something out to show the profile picture from comments (DONE)
+2) Next 5 for the events bar at the side
+3) Events list page / homepage
+4) Accounts Page
+5) install Django-registration-redux, Login Page and Auth Decorators (DONE - ALLAUTH from DCC)
+6) Add an Event Page
+7) Events voting page(s)  (run through them sequentially)
+8) Badge on list page indicating those that need attention
+9) Add comments form
+

@@ -13,22 +13,22 @@
         {% else %}
         <div class="alert alert-warning" role="alert">Date TBC</div>
         {% endif %}
-      
+
         {% if event.booked %}
         <div class="alert alert-success" role="alert">Booked</div>
         {% else %}
         <div class="alert alert-warning" role="alert">Not Booked</div>
         {% endif %}
-        
+
     </div>
     <div class="col-sm-8 text-left">
       <h1>{{ event.title }}</h1>
       <p>{{ event.notes }}</p>
       <img src="{{event.picture_url}}">
-        {% include 'comments.html' %}
+        {% include 'core/comments.html' %}
 
 
-        {% include 'events_sidebar.html' %}
+        {% include 'core/events_sidebar.html' %}
 
   </div>
 </div>

@@ -3,7 +3,7 @@
 {% block content %}
 
 <h1> New SupperClub Event</h1>
-    <form action="{% url 'core.views.new_event' %}" method="post">
+    <form action="{% url 'core.views.add_event' %}" method="post">
         {% csrf_token %}
 
         {{ form.as_p}}

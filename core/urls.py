@@ -21,10 +21,11 @@ import views
 urlpatterns = [
 
     url(r'^admin/', admin.site.urls),
-    url(r'^events/(?P<event_slug>[^/]+)/$', views.event, name="events"),
-    url(r'^new_event/', views.new_event, name='edit_event'),
-    url(r'^new_comment/', views.new_comment, name='new_comment'),
-    url(r'^all_events/', views.ViewAll.as_view(), name='all_events'),
+    url(r'^events/(?P<event_slug>[^/]+)$', views.event, name="events"),
+    url(r'^add_event', views.add_event, name='add_event'),
+    url(r'^new_comment', views.new_comment, name='new_comment'),
+    url(r'^all_events', views.all_events, name='all_events'),
+    url(r'random', views.random, name='random'),
     url(r'^', views.main),
     #url(r'^events/', views.event),
 ]

@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Event, Comments
+from .models import Event, Comment
 
 class EventForm(forms.ModelForm):
 
@@ -22,7 +22,7 @@ class CommentForm(forms.ModelForm):
 
     #don't use the auto gen for this one, need to populate.
     class Meta:
-        model = Comments
+        model = Comment
 
         fields = ('comment','timestamp', 'event', 'user')
 
