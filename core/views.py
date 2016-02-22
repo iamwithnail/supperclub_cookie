@@ -75,3 +75,5 @@ def new_comment(request):
         form = CommentForm()
 
     return render(request, 'core/event.html', {"form": form})
+
+

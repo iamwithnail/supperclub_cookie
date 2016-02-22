@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 from __future__ import absolute_import, unicode_literals
 
-import environ
+import environ, cloudinary
 
 ROOT_DIR = environ.Path(__file__) - 3  # (/a/b/myfile.py - 3 = /)
 APPS_DIR = ROOT_DIR.path('supperclub2')
@@ -230,3 +230,9 @@ AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
 ADMIN_URL = r'^admin/'
 
 # Your common stuff: Below this line define 3rd party library settings
+
+cloudinary.config(
+  cloud_name = "dvkkjwzjq",
+  api_key = "486615593347826",
+  api_secret = "6uWQ8vTHTEkKh1l7rGo0D1wA-j8"
+)

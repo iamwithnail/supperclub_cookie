@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {{  user }}
+
+     <form action="/users/{{user.username}}/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+     <label for="profile_photo" class="col-sm-2 control-label">Cover Photo </label>
+                    <div class="col-sm-10">
+                      <input type="file" class="form-control" id="profile_photo" name="profile_photo" >
+                    </div>
+<button type="submit" class="save btn btn-default">Save</button>
+    </form>
+    <img src="{{ profile.picture }}">
+{% endblock %}
