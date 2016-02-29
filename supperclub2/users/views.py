@@ -13,15 +13,18 @@ from .models import User
 
 
 def profile(request, username):
-
+    from django.core.exceptions import ObjectDoesNotExist
     import cloudinary.uploader as cup
     from core.models import Profile
     print request.user
     print username
-    profile = Profile.objects.get(user=request.user)
-    print profile.picture
-    if request.method == 'POST':
 
+    if request.method == 'POST':
+        try:
+            profile = Profile.objects.get(user=request.user)
+        except(ObjectDoesNotExist):
+            profile = Profile()
+            profile.user = request.user
         profile_picture = request.FILES['profile_photo']
         print profile_picture
         uploaded_image = cup.upload(
@@ -35,7 +38,11 @@ def profile(request, username):
         profile.picture = filename
         print profile.picture
         profile.save()
-
+    if request.method == 'GET':
+        try:
+            profile = Profile.objects.get(user=request.user)
+        except(ObjectDoesNotExist):
+            return render(request, 'users/profile.html', {"user": request.user, "profile": ""})
     else:
         pass
     return render(request, 'users/profile.html', {"user": request.user, "profile": profile})

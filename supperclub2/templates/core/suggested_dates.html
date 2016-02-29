@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<H1>{{ event.title }} </H1>
+    <h2> Alternative Date Suggestions</H2>
+    <h3> Current date: {{ event.date }}</h3>
+
+    {% for suggestion in suggested_dates %}
+     {{ suggestion.date }} </br>
+    {% endfor %}
+
+{% endblock content %}
+

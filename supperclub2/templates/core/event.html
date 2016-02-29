@@ -25,7 +25,8 @@
       <h1>{{ event.title }}</h1>
       <p>{{ event.notes }}</p>
       <img src="{{event.picture_url}}">
-        {% include 'core/comments.html' %}
+        {% load comments_bar %}
+        {%  show_comments event.pk %}
 
 
         {% include 'core/events_sidebar.html' %}

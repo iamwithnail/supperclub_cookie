@@ -1,8 +1,6 @@
-<hr
       <h3>Comments</h3>
         {% for comment in comments %}
-
-      <p><img src="{{ comment.picture }}" class="img-circle"> {{comment.timestamp}} {{comment.text}} </p>
+      <p><img src="{{ comment.picture }}" class="img-circle"> {{comment.timestamp}} {{comment.comment}} </p>
 
         {% endfor %}
 
@@ -10,9 +8,9 @@
     {% csrf_token %}
 
     {% for field in form %}
-    <p>{{ field.errors}} | {{ field.label_tag}} | {{ field }}
+    <div class="fieldwrapper"><p>{{ field.errors}} | {{ field.label_tag}} | {{ field }}
         {% endfor %}
     <button type="submit" class="save btn btn-default">Save</button>
 </form>
-
+</div>
     </div>

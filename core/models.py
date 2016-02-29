@@ -32,10 +32,10 @@ class SuggestedEventDate(models.Model):
 class EventVote(models.Model):
     suggested_date = models.ForeignKey(SuggestedEventDate)
     user = models.ForeignKey(User)
-    vote = models.BooleanField
+    vote = models.BooleanField()
 
     def __str__(self):
-        return self.event.title + " " + self.user + " " + self.vote
+        return self.suggested_date.event.title + " " + self.user.first_name + " " + str(self.vote)
 
 
 class Profile(models.Model):

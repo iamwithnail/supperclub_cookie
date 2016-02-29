@@ -22,6 +22,7 @@ urlpatterns = [
 
     url(r'^admin/', admin.site.urls),
     url(r'^events/(?P<event_slug>[^/]+)$', views.event, name="events"),
+    url(r'^events/(?P<event_slug>[^/]+)/dates/$', views.suggested_event_dates, name="event_dates"),
     url(r'^add_event', views.add_event, name='add_event'),
     url(r'^new_comment', views.new_comment, name='new_comment'),
     url(r'^all_events', views.all_events, name='all_events'),
@@ -29,4 +30,6 @@ urlpatterns = [
     url(r'^', views.main),
     #url(r'^events/', views.event),
 ]
+
+    #url(r'^fixtures/(?P<league>[^/]+)/(?P<date_in>[^/]+)/$', ('core.views.fixtures')),
 

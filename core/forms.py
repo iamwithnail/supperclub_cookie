@@ -3,26 +3,25 @@ from django import forms
 from .models import Event, Comment
 
 class EventForm(forms.ModelForm):
+    name = forms.CharField()
+    date = forms.DateField(widget=forms.SelectDateWidget)
+    location_title = forms.CharField()
+    location_code = forms.CharField()
+    title = forms.CharField()
+    picture_url = forms.URLField()
+    notes = forms.CharField()
+    additional_notes = forms.CharField()
+    confirmed = forms.BooleanField()
+    booked = forms.BooleanField()
 
     class Meta:
         model = Event
-        fields = ('date',
-                  'location_title',
-                  'location_code',
-                  'title',
-                  'picture_url',
-                  'notes',
-                  'additional_notes',
-                  'confirmed',
-                  'booked',
-                  'event_url',)
-
+        exclude = ('event_url',)
 
 class CommentForm(forms.ModelForm):
+    comment = models.TextField()
 
     #don't use the auto gen for this one, need to populate.
     class Meta:
         model = Comment
-
-        fields = ('comment','timestamp', 'event', 'user')
-
+        exclude = ('',)
