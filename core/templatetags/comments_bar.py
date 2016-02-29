@@ -2,13 +2,21 @@ from django import template
 
 register = template.Library()
 
-@register.inclusion_tag('core/comments.html')
-def show_comments(event_pk):
-    from core.models import Comment, Profile
-    # from supperclub2.users import
-    comments = Comment.objects.filter(event__pk=event_pk).prefetch_related('user')
-
-    print "DEBUG CMMNETS TAG"
+@register.inclusion_tag('core/comments.html', takes_context=True)
+def show_comments(context):
+    from core.models import Comment, Profile, Event
+    from datetime import datetime
+    comments = Comment.objects.filter(event__pk=context['event'].id).prefetch_related('user')
+    from core.forms import CommentForm
+    data = {"event": context['event'].id, "user": context['request'].user, "timestamp": datetime.now()}
+    form = CommentForm(initial=data)
+    form.user = context['request'].user
+    form.event = context['event'].id
+    print "DEBUG FORM"
+    print form.event, form.user, form
+    #prepoulate the form here - user = request.user, timestamp = now()
+    #event = event_pk
+    print "DEBUG COMMENETS TAG"
     for comment in comments:
         print comment.comment, comment.user, comment.timestamp
 
@@ -21,4 +29,5 @@ def show_comments(event_pk):
                         "timestamp": comment.timestamp,
         }
         final_comments.append(temp_comment)
-    return {"comments": final_comments}
+    return {"comments": final_comments, "form": form}
+

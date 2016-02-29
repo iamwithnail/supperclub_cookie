@@ -19,9 +19,7 @@ class EventForm(forms.ModelForm):
         exclude = ('event_url',)
 
 class CommentForm(forms.ModelForm):
-    comment = models.TextField()
 
-    #don't use the auto gen for this one, need to populate.
     class Meta:
         model = Comment
-        exclude = ('',)
+        exclude = ('', )

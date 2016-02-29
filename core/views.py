@@ -50,18 +50,17 @@ def new_comment(request):
     print request.POST
     print request.path_info
     if request.method == "POST":
-        form = CommentForm(request.POST)
-
-        print request.POST
         import datetime
+        form = CommentForm(request.POST)
         print "DEBUG FORM", form
         comment = form.save(commit=False)
         comment.user = request.user
         comment.timestamp = datetime.datetime.now()
         print comment.user, comment.timestamp, comment.comment
         comment.save()
+        event = Event.objects.get(id=request.POST['event'])
         print "DEBUG", comment
-        return redirect('events/{{comment.event.event_url}}')
+        return redirect('events/' + event.event_url)
     else:
         print "DEBUG else"
         form = CommentForm()
