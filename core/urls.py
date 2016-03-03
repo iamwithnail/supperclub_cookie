@@ -16,16 +16,16 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 import views
-
+from .models import Event
 
 urlpatterns = [
 
     url(r'^admin/', admin.site.urls),
-    url(r'^events/(?P<event_slug>[^/]+)$', views.event, name="events"),
     url(r'^events/(?P<event_slug>[^/]+)/dates/$', views.suggested_event_dates, name="event_dates"),
+    url(r'^events/(?P<event_slug>[^/]+)$', views.event, name="events"),
     url(r'^add_event', views.add_event, name='add_event'),
     url(r'^new_comment', views.new_comment, name='new_comment'),
-    url(r'^all_events', views.all_events, name='all_events'),
+    url(r'^all_events', views.EventsListView.as_view(queryset=Event.objects.all()), name='all_events'),
     url(r'random', views.random, name='random'),
     url(r'^', views.main),
     #url(r'^events/', views.event),

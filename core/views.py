@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
-from config.settings.common import AUTH_USER_MODEL as User
+from supperclub2.users.models import User
 from .models import Event
+from django.views.generic import DetailView, ListView, RedirectView, UpdateView
+from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
@@ -12,11 +15,16 @@ def random(request):
 
 from django.views.generic import ListView
 
+"""
 def all_events(request):
     from .models import Event
     events = Event.objects.all()
     return render(request, 'core/event_list.html', {"events": events})
+"""
 
+class EventsListView(LoginRequiredMixin, ListView):
+    template_name = 'core/event_listhtml'
+    model = Event
 
 def event(request, event_slug):
     from .models import Event, Comment, Profile
@@ -71,8 +79,8 @@ def new_comment(request):
 def suggested_event_dates(request, event_slug):
     from .models import Event, SuggestedEventDate, EventVote
     event_object = Event.objects.get(event_url=event_slug)
-    suggested_dates = SuggestedEventDate.objects.filter(event=event_object).prefetch_related()
-
+    suggested_dates = SuggestedEventDate.objects.filter(event=event_object).prefetch_related('eventvote')
+    print suggested_dates
     all_users = User.objects.all()
     user_votes = EventVote.objects.filter(suggested_date__in=suggested_dates).\
         prefetch_related().order_by('suggested_date')
