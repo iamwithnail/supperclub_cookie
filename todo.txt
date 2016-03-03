@@ -1,10 +1,12 @@
 1) Sort something out to show the profile picture from comments (DONE)
-2) Next 5 for the events bar at the side
-3) Events list page / homepage
-4) Accounts Page
+2) Next 5 for the events bar at the side (DONE)
+3) Events list page / homepage (DONE)
+4) Accounts Page (DONE)N
 5) install Django-registration-redux, Login Page and Auth Decorators (DONE - ALLAUTH from DCC)
-6) Add an Event Page
+6) Add an Event Page (DONE)
 7) Events voting page(s)  (run through them sequentially)
 8) Badge on list page indicating those that need attention
-9) Add comments form
+9) Add comments form (DONE)
 
+10) Add the addresses/workplaces and find a place equidistant   (whereshallwemeet.com)
+11) Add the Google Geolocation / places API
