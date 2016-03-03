@@ -22,7 +22,7 @@ from .models import Event
 urlpatterns = [
 
     url(r'^admin/', admin.site.urls),
-    url(r'^events/(?P<event_slug>[^/]+)/dates/$', views.suggested_event_dates, name="event_dates"),
+    url(r'^suggested-dates/(?P<event_slug>[^/]+)', views.suggested_event_dates, name="event_dates"),
     url(r'^events/(?P<event_slug>[^/]+)$', views.event, name="events"),
     url(r'^add_event', views.add_event, name='add_event'),
     url(r'^new_comment', views.new_comment, name='new_comment'),
@@ -34,3 +34,4 @@ urlpatterns = [
 
     #url(r'^fixtures/(?P<league>[^/]+)/(?P<date_in>[^/]+)/$', ('core.views.fixtures')),
 
+    #url(r'^matchbydate/(?P<date_in>[^/]+)/$', ('core.views.view_all_matches_for_date')),

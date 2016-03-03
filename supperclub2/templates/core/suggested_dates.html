@@ -5,9 +5,16 @@
     <h2> Alternative Date Suggestions</H2>
     <h3> Current date: {{ event.date }}</h3>
 
-    {% for suggestion in suggested_dates %}
-     {{ suggestion.date }} </br>
+    {% for suggestion, response in votes_by_date.items %}
+        {{ suggestion.date }} : {% for user, vote in response.items %}{{ user }} {{ user.profile.picture }} {{ vote }} {% endfor %}
+     {{ suggestion.date }}
+    </br>
     {% endfor %}
+
+    {block voting %}
+    Block here which contains the users vote and a slider switch.   http://www.bootstrap-switch.org/examples.html
+    Eventually - first just have yes/no. Conditional templating as with other user. 
+    {% endblock %}
 
 {% endblock content %}
 

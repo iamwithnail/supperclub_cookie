@@ -27,7 +27,7 @@ class SuggestedEventDate(models.Model):
     date = models.DateField()
 
     def __str__(self):
-        return self.event.title
+        return self.event.title + str(self.date)
 
 class EventVote(models.Model):
     suggested_date = models.ForeignKey(SuggestedEventDate)
@@ -35,7 +35,7 @@ class EventVote(models.Model):
     vote = models.BooleanField()
 
     def __str__(self):
-        return self.suggested_date.event.title + " " + self.user.first_name + " " + str(self.vote)
+        return self.user.first_name +" " + str(self.suggested_date) + " " + str(self.vote) + " " + self.suggested_date.event.title
 
 
 class Profile(models.Model):

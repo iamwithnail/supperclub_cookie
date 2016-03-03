@@ -78,28 +78,26 @@ def new_comment(request):
 
 def suggested_event_dates(request, event_slug):
     from .models import Event, SuggestedEventDate, EventVote
+    from django.core.exceptions import ObjectDoesNotExist
     event_object = Event.objects.get(event_url=event_slug)
-    suggested_dates = SuggestedEventDate.objects.filter(event=event_object).prefetch_related('eventvote')
-    print suggested_dates
-    all_users = User.objects.all()
-    user_votes = EventVote.objects.filter(suggested_date__in=suggested_dates).\
-        prefetch_related().order_by('suggested_date')
+    suggested_dates = SuggestedEventDate.objects.filter(event=event_object).prefetch_related('eventvote_set')
+    all_users = User.objects.all().prefetch_related('profile')
+    user_votes = EventVote.objects.filter(suggested_date__in=suggested_dates).order_by('suggested_date')
     dates_response = {}
-    """for suggestion in suggested_dates:
+    #this is a pretty horrible hack, but works for now - really should refactor to be a prefetch/join
+    #WILL NOT SCALE
+    for suggestion in suggested_dates:
         dates_response[suggestion] = {}
         for u in all_users:
-            for v in in user_votes:
-                if
-                pass
+            try:
+                #this captures if someone has actually voted
+                dates_response[suggestion][u] = user_votes.get(suggested_date=suggestion, user=u).vote
+            except ObjectDoesNotExist:
+                #this allows us to do something different in the template if they havne't voted
+                dates_response[suggestion][u] = None
+    print dates_response
 
-    for user in all_users:
-        if user not in user_votes:
-
-       """
-
-    print all_users
-    print user_votes
     return render (request,
                    'core/suggested_dates.html',
-                   {"suggested_dates": suggested_dates, "event": event_object, "user_votes": user_votes}
+                   {"suggested_dates": suggested_dates, "event": event_object, "votes_by_date": dates_response}
                    )
