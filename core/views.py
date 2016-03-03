@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 def main(request):
-    return render(request, 'core/index.html')
+    return render(request, )
 
 def random(request):
     return render(request, 'core/core/basetest.html')

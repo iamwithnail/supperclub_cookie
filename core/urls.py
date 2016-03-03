@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.views.generic import TemplateView
 import views
 from .models import Event
 
@@ -27,7 +28,7 @@ urlpatterns = [
     url(r'^new_comment', views.new_comment, name='new_comment'),
     url(r'^all_events', views.EventsListView.as_view(queryset=Event.objects.all()), name='all_events'),
     url(r'random', views.random, name='random'),
-    url(r'^', views.main),
+    url(r'^', TemplateView.as_view(template_name='core/index.html')),
     #url(r'^events/', views.event),
 ]
 
