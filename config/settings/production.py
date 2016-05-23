@@ -16,6 +16,9 @@ from django.utils import six
 
 
 from .common import *  # noqa
+env = environ.Env()
+env.read_env(ROOT_DIR('.env'))
+
 
 # SECRET CONFIGURATION
 # ------------------------------------------------------------------------------
