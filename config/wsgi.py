@@ -1,5 +1,5 @@
 """
-WSGI config for supperclub2 project.
+WSGI config for treatout project.
 
 This module contains the WSGI application used by Django's development server
 and any production WSGI deployments. It should expose a module-level variable
@@ -15,9 +15,7 @@ framework.
 """
 import os
 
-if os.environ.get("DJANGO_SETTINGS_MODULE") == "config.settings.production":
-    import newrelic.agent
-    newrelic.agent.initialize()
+
 from django.core.wsgi import get_wsgi_application
 
 
@@ -35,8 +33,7 @@ application = get_wsgi_application()
 
 
 
-if os.environ.get("DJANGO_SETTINGS_MODULE") == "config.settings.production":
-    application = newrelic.agent.WSGIApplicationWrapper(application)
+
 # Apply WSGI middleware here.
 # from helloworld.wsgi import HelloWorldApplication
 # application = HelloWorldApplication(application)
