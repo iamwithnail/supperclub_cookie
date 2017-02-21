@@ -67,7 +67,6 @@ def new_comment(request):
         print comment.user, comment.timestamp, comment.comment
         comment.save()
         event = Event.objects.get(id=request.POST['event'])
-        print "DEBUG", comment
         return redirect('events/' + event.event_url)
     else:
         print "DEBUG else"
@@ -75,29 +74,21 @@ def new_comment(request):
 
     return render(request, 'core/event.html', {"form": form})
 
+def manage_reviews(reviews_dict):
+    #pass
 
-def suggested_event_dates(request, event_slug):
-    from .models import Event, SuggestedEventDate, EventVote
-    from django.core.exceptions import ObjectDoesNotExist
-    event_object = Event.objects.get(event_url=event_slug)
-    suggested_dates = SuggestedEventDate.objects.filter(event=event_object).prefetch_related('eventvote_set')
-    all_users = User.objects.all().prefetch_related('profile')
-    user_votes = EventVote.objects.filter(suggested_date__in=suggested_dates).order_by('suggested_date')
-    dates_response = {}
-    #this is a pretty horrible hack, but works for now - really should refactor to be a prefetch/join
-    #WILL NOT SCALE
-    for suggestion in suggested_dates:
-        dates_response[suggestion] = {}
-        for u in all_users:
-            try:
-                #this captures if someone has actually voted
-                dates_response[suggestion][u] = user_votes.get(suggested_date=suggestion, user=u).vote
-            except ObjectDoesNotExist:
-                #this allows us to do something different in the template if they havne't voted
-                dates_response[suggestion][u] = None
-    print dates_response
+def manage_photos(photos_dict):
+    #pass
 
-    return render (request,
-                   'core/suggested_dates.html',
-                   {"suggested_dates": suggested_dates, "event": event_object, "votes_by_date": dates_response}
-                   )
+
+def get_place_details(google_place_id='ChIJO4rSTqADdkgRWXF0GwEEESg'):
+    #default to peckham plex for now
+    import requests
+    key ="AIzaSyDJLGzlgU8zlLqjPttZqvnp2-H01bBxUH8"
+    BASE_URL = 'https://maps.googleapis.com/maps/api/place/details/json?placeid='
+    request_url = BASE_URL+google_place_id+'&key='+key
+    results = requests.get(request_url)['result']
+    #supplies website, utc_offset, name, reference, photos, geometry, adr_adress
+    #vicinity, reviews, formatted_phone_number,
+
+

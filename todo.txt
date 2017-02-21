@@ -1,12 +1,19 @@
-1) Sort something out to show the profile picture from comments (DONE)
-2) Next 5 for the events bar at the side (DONE)
-3) Events list page / homepage (DONE)
-4) Accounts Page (DONE)N
-5) install Django-registration-redux, Login Page and Auth Decorators (DONE - ALLAUTH from DCC)
-6) Add an Event Page (DONE)
 7) Events voting page(s)  (run through them sequentially)
 8) Badge on list page indicating those that need attention
-9) Add comments form (DONE)
 
 10) Add the addresses/workplaces and find a place equidistant   (whereshallwemeet.com)
 11) Add the Google Geolocation / places API
+    - Map comes up, centred on SW1
+    - Name in - autocomplete
+    - Is there an 'onSelectEvent' from that form/embed?
+    - Take that value and add it to the form as eventcode
+    - Use that code to call the API from the eventspage to pull photograph, address, etc.
+
+
+12) Change to Django-Crispy Forms for the add form layout
+13) Add an edit form  (django helpdesk form might be good for this?)
+14) Install
+15) Use S3 for the profile pictures.
+16) Probably need to change out the Django Mailgun API for the anymail one (and use Mandrill, I suspect)
+17) Move social links (Twitter, Insta) to their own fields, or use AllAuth?
+

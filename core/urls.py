@@ -13,25 +13,26 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.generic import TemplateView
 import views
 from .models import Event
+from supperclub2 import users
 
 urlpatterns = [
 
     url(r'^admin/', admin.site.urls),
-    url(r'^suggested-dates/(?P<event_slug>[^/]+)', views.suggested_event_dates, name="event_dates"),
+    url(r'^event/placepicker/$', TemplateView.as_view(template_name='core/placepicker.html')),
+    url(r'^events/all/$', views.EventsListView.as_view(queryset=Event.objects.all()), name='all_events'),
     url(r'^events/(?P<event_slug>[^/]+)$', views.event, name="events"),
     url(r'^add_event', views.add_event, name='add_event'),
     url(r'^new_comment', views.new_comment, name='new_comment'),
-    url(r'^all_events', views.EventsListView.as_view(queryset=Event.objects.all()), name='all_events'),
+
     url(r'random', views.random, name='random'),
     url(r'^', TemplateView.as_view(template_name='core/index.html')),
-    #url(r'^events/', views.event),
+
 ]
 
-    #url(r'^fixtures/(?P<league>[^/]+)/(?P<date_in>[^/]+)/$', ('core.views.fixtures')),
 
-    #url(r'^matchbydate/(?P<date_in>[^/]+)/$', ('core.views.view_all_matches_for_date')),
+#    url(r'^admin/', include(admin.site.urls)),

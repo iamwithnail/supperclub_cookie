@@ -22,9 +22,9 @@
 
     </div>
     <div class="col-sm-8 text-left">
-      <h1>{{ event.title }}</h1>
+      <h1>{{ event.location_title }} - {{ event.date }}</h1>
       <p>{{ event.notes }}</p>
-      <img src="{{event.picture_url}}">
+      <img class="event-pic" src="{{event.picture_url}}">
         {% load comments_bar %}
         {%  show_comments %}
 

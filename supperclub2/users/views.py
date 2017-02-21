@@ -5,7 +5,6 @@ from django.core.urlresolvers import reverse
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
-
 from .models import User
 
 
@@ -14,10 +13,17 @@ from .models import User
 
 def profile(request, username):
     from django.core.exceptions import ObjectDoesNotExist
-    import cloudinary.uploader as cup
+
     from core.models import Profile
     print request.user
     print username
+    import cloudinary
+    import cloudinary.uploader
+    cloudinary.config(
+        cloud_name="dvkkjwzjq",
+        api_key="486615593347826",
+        api_secret="6uWQ8vTHTEkKh1l7rGo0D1wA-j8"
+    )
 
     if request.method == 'POST':
         try:
@@ -25,14 +31,12 @@ def profile(request, username):
         except(ObjectDoesNotExist):
             profile = Profile()
             profile.user = request.user
+        print request
+        print "FILES", request.FILES
         profile_picture = request.FILES['profile_photo']
-        print profile_picture
-        uploaded_image = cup.upload(
-            profile_picture,
-            crop='limit',
-            width=600,
-            height=550,
-            )
+        print "Profile picture", type(profile_picture)
+        uploaded_image = cloudinary.uploader.upload(profile_picture)
+        print "PAST THE UPLOAD", uploaded_image
         filename=uploaded_image["secure_url"]
         print filename
         profile.picture = filename

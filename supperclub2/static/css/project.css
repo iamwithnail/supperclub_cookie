@@ -36,3 +36,8 @@
 [hidden][style="display: block;"] {
   display: block !important;
 }
+
+.event-pic {
+  width: 50%;
+}
+

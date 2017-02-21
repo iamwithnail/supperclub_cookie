@@ -12,5 +12,9 @@
                     </div>
 <button type="submit" class="save btn btn-default">Save</button>
     </form>
+    {% if profile.picture %}
     <img src="{{ profile.picture }}">
+    {% else %}
+    <p> Upload a picture now!</p>
+    {% endif %}
 {% endblock %}
